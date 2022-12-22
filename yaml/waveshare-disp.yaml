@@ -1,0 +1,632 @@
+esphome:
+  name: "waveshare-disp"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "SljLReOaaq37OjIZdJUZsSN/qU9NSMbAHyI8XhXPNvY="
+  
+
+ota:
+  password: "a316a758f92c68a8f422b709e9b54cf5"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Waveshare Fallback Hotspot"
+    password: "MI0BbFCPhMTA"
+
+captive_portal:
+
+# epaper driver board
+spi:
+  clk_pin: 13
+  mosi_pin: 14
+ 
+# --- Fonts --------------------------------------------------------------------  
+
+font:
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: openSansBold_70
+    size: 70
+    glyphs:
+      ['&', '@', '!', '?', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '/', '€', '’', 'ß']
+  
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: openSansBold_50
+    size: 50
+    glyphs:
+      ['&', '@', '!', '?', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '/', '€', '’', 'ß']
+  
+
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: openSansBold_font
+    size: 20
+    glyphs:
+      ['&', '@', '!', '?', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '/', '€', '’', 'ß']
+  
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: openSansBold_13
+    size: 13
+    glyphs:
+      ['&', '@', '!', '?', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '/', '€', '’', 'ß']
+  
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: openSansBold_14
+    size: 14
+    glyphs:
+      ['&', '@', '!', '?', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '/', '€', '’', 'ß']
+
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: openSansBold_16
+    size: 16
+    glyphs:
+      ['&', '@', '!', '?', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z', 'å', 'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '/', '€', '’', 'ß']     
+ 
+  - file: 'fonts/OpenSans-Bold.ttf'
+    id: watch_font
+    size: 90
+    glyphs:
+      [':', ".", '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  
+  # --- Icons -------------------------------------------------------------------------     
+  # https://pictogrammers.github.io/@mdi/font/6.5.95/    Unicodes
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: materialdesign_icons_25
+    size: 25
+    glyphs: [
+      "\U000F050F", # mdi-thermometer
+      "\U000F0F55", # mdi-home-thermometer-outline
+      "\U000F0F54", # mdi-home-thermometer
+      "\U000F058E", # mdi-water-percent
+      "\U000F029A", # mdi-gauge
+      "\U000F1982", # mdi-ip-outline
+      "\U000F059B", # mdi-weather-sunset
+      "\U000F059C", # mdi-weather-sunrise
+      "\U000F059D", # weather-windy
+      "\U000F10C2", # mdi-thermometer-high
+      "\U000F10C3"  # mdi-thermometer-low
+      ]
+       
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: materialdesign_icons_32
+    size: 32
+    glyphs: [
+      "\U000F091F", # mdi-wifi-strength-1
+      "\U000F0922", # mdi-wifi-strength-2
+      "\U000F0925", # mdi-wifi-strength-3
+      "\U000F0928", # mdi-wifi-strength-4
+      "\U000F0A7A", # mdi-trash-can-outline
+      "\U000F092B", # mdi-wifi-strength-alert-outline
+      "\U000F050F", # mdi-thermometer
+      "\U000F02CA", # mdi-harddisk
+      "\U000F0298", # mdi-gas-station
+      "\U000F0FE5", # mdi-tanker-truck
+      "\U000F1055", # mdi-palm-tree
+      "\U000F156D", # mdi-sofa-outline
+      "\U000F07E4", # mdi-molecule-co2
+      "\U000F1982", # mdi-ip-outline
+      "\U000F1508", # mdi-water-off-outline
+      "\U000F1382", # mdi-compass-rose
+      "\U000F0F61", # mdi-moon-first-quarter
+      "\U000F0F62", # mdi-moon-full
+      "\U000F0F63", # mdi-moon-last-quarter
+      "\U000F0F64", # mdi-moon-new
+      "\U000F0F65", # mdi-moon-waning-crescent
+      "\U000F0F66", # mdi-moon-waning-gibbous
+      "\U000F0F67", # mdi-moon-waxing-crescent
+      "\U000F0F68", # mdi-moon-waxing-gibbous
+      "\U000F0590", # weather-cloudy
+      "\U000F0F2F", # weather-cloudy-alert
+      "\U000F0E6E", # weather-cloudy-arrow-right
+      "\U000F0591", # weather-fog
+      "\U000F0592", # weather-hail
+      "\U000F0F30", # weather-hazy
+      "\U000F0898", # weather-hurricane
+      "\U000F0593", # weather-lightning
+      "\U000F067E", # weather-lightning-rainy
+      "\U000F0594", # weather-night
+      "\U000F0F31", # weather-night-partly-cloudy
+      "\U000F0595", # weather-partly-cloudy
+      "\U000F0F32", # weather-partly-lightning
+      "\U000F0F33", # weather-partly-rainy
+      "\U000F0F34", # weather-partly-snowy
+      "\U000F0F35", # weather-partly-snowy-rainy
+      "\U000F0596", # weather-pouring
+      "\U000F0597", # weather-rainy
+      "\U000F0598", # weather-snowy
+      "\U000F0F36", # weather-snowy-heavy
+      "\U000F067F", # weather-snowy-rainy
+      "\U000F0599", # weather-sunny
+      "\U000F0F37", # weather-sunny-alert
+      "\U000F14E4", # weather-sunny-off
+      "\U000F059A", # weather-sunset
+      "\U000F059B", # weather-sunset-down
+      "\U000F059C", # weather-sunset-up
+      "\U000F0F38", # weather-tornado
+      "\U000F059D", # weather-windy
+      "\U000F059E" # weather-windy-variant
+      ]
+
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: materialdesign_icons_42
+    size: 42
+    glyphs: [
+      "\U000F0298", # mdi-gas-station
+      "\U000F07E4" # mdi-molecule-co2
+    ]
+       
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: materialdesign_icons_50
+    size: 80
+    glyphs: [
+      "\U000F0590", # weather-cloudy
+      "\U000F0F2F", # weather-cloudy-alert
+      "\U000F0E6E", # weather-cloudy-arrow-right
+      "\U000F0591", # weather-fog
+      "\U000F0592", # weather-hail
+      "\U000F0F30", # weather-hazy
+      "\U000F0898", # weather-hurricane
+      "\U000F0593", # weather-lightning
+      "\U000F067E", # weather-lightning-rainy
+      "\U000F0594", # weather-night
+      "\U000F0F31", # weather-night-partly-cloudy
+      "\U000F0595", # weather-partly-cloudy
+      "\U000F0F32", # weather-partly-lightning
+      "\U000F0F33", # weather-partly-rainy
+      "\U000F0F34", # weather-partly-snowy
+      "\U000F0F35", # weather-partly-snowy-rainy
+      "\U000F0596", # weather-pouring
+      "\U000F0597", # weather-rainy
+      "\U000F0598", # weather-snowy
+      "\U000F0F36", # weather-snowy-heavy
+      "\U000F067F", # weather-snowy-rainy
+      "\U000F0599", # weather-sunny
+      "\U000F0F37", # weather-sunny-alert
+      "\U000F14E4", # weather-sunny-off
+      "\U000F059A", # weather-sunset
+      "\U000F059B", # weather-sunset-down
+      "\U000F059C", # weather-sunset-up
+      "\U000F0F38", # weather-tornado
+      "\U000F059D", # weather-windy
+      "\U000F059E" # weather-windy-variant
+    ]
+ 
+ 
+# --- Sensors ------------------------------------------------------------------
+
+sensor:
+  # ESP Home UpTime
+  - platform: uptime
+    id: uptime_sensor
+    update_interval: 60s
+    on_raw_value:
+      then:
+        - text_sensor.template.publish:
+            id: uptime_human
+            state: !lambda |-
+              int seconds = round(id(uptime_sensor).raw_state);
+              int days = seconds / (24 * 3600);
+              seconds = seconds % (24 * 3600);
+              int hours = seconds / 3600;
+              seconds = seconds % 3600;
+              int minutes = seconds /  60;
+              seconds = seconds % 60;
+              return (
+                (days ? String(days) + ":" : "000:") +
+                (hours ? String(hours) + ":" : "00:") +
+                (minutes ? String(minutes) + ":" : "00:") +
+                (String(seconds) + "")
+              ).c_str();  
+  - platform: wifi_signal
+    id: wifisignal
+    update_interval: 60s
+  # Actual Outside Temp + min + max
+  - platform: homeassistant
+    id: temp
+    entity_id: sensor.00185d89a9f2ef_actual_temperature
+    internal: true
+  - platform: homeassistant
+    id: outside_temp_min
+    entity_id: sensor.outside_temp_min_last_24h
+    internal: true
+  - platform: homeassistant
+    id: outside_temp_max
+    entity_id: sensor.outside_temp_max_last_24h
+    internal: true    
+  # Rain
+  - platform: homeassistant
+    id: rain_today
+    entity_id: sensor.rain_today
+    internal: true 
+  # Wind Speed / Dir 
+  - platform: homeassistant
+    id: windspeed
+    entity_id: sensor.00185d89a9f2ef_wind_speed
+    internal: true
+  - platform: homeassistant
+    id: winddir
+    entity_id: sensor.00185d89a9f2ef_wind_dir
+    internal: true
+  - platform: homeassistant
+    id: wind_max
+    entity_id: sensor.wind_speed_max_last_24h
+    internal: true
+  - platform: homeassistant
+    id: wind_min
+    entity_id: sensor.wind_speed_min_last_24h
+    internal: true 
+  # Windchill
+  - platform: homeassistant
+    id: windchill
+    entity_id: sensor.windchill
+    internal: true 
+
+
+    
+ 
+
+text_sensor:
+  
+  # ESP Home UpTime
+  - platform: template
+    id: uptime_human
+    icon: mdi:clock-start
+  # Weather forecast 
+  - platform: homeassistant
+    id: epaper_weather_actual
+    entity_id: sensor.epaper_weather_actual
+    internal: true
+  - platform: homeassistant
+    id: epaper_weather_forecast
+    entity_id: sensor.epaper_forecast
+    internal: true
+  #Fuel & Oel
+  - platform: homeassistant
+    id: fuel_avia
+    entity_id: sensor.avia_e10
+  - platform: homeassistant
+    id: fuel_jet
+    entity_id: sensor.jet_e10
+  - platform: homeassistant
+    id: heizoel
+    entity_id: sensor.epaper_oel
+  - platform: homeassistant
+    id: inside_temp
+    entity_id: sensor.epaper_inside_temp
+  # Sunset/rise
+  - platform: homeassistant
+    id: epaper_sunrise
+    entity_id: sensor.epaper_sunrise
+    internal: true
+  - platform: homeassistant
+    id: epaper_sunset
+    entity_id: sensor.epaper_sunset   
+    internal: true
+  # CO2
+  - platform: homeassistant
+    id: co2
+    entity_id: sensor.nodered_b687e96f_8a5d98   
+    internal: true
+  # Waste Sensor
+  - platform: homeassistant
+    id: waste
+    entity_id: sensor.epaper_waste
+    internal: true
+  # Rain-Status
+  - platform: homeassistant
+    id: rain_status
+    entity_id: binary_sensor.00185d89a9f2ef_raining
+    internal: true
+  # Moon Phase sensor.moon_phase
+  - platform: homeassistant
+    id: moon
+    entity_id: sensor.moon_phase
+    internal: true
+  # Wind Direction Text
+  - platform: homeassistant
+    id: wind_dir_txt
+    entity_id: sensor.wind_dir
+    internal: true
+
+  
+ 
+time:
+  - platform: homeassistant
+    id: hass_time
+
+
+# --- Display Layout -----------------------------------------------------------
+display:
+  - platform: waveshare_epaper
+    cs_pin: 15
+    dc_pin: 27
+    busy_pin: 25
+    reset_pin: 26
+    reset_duration: 2ms
+    model: 7.50in-bV2
+    update_interval: 600s
+    lambda: |
+     ESP_LOGI("display", "Updating..");
+     int x, y;
+      
+     // Grid
+     // For example, draw a line from [x=0,y=0] to [x=50,y=50]
+     it.line(0, 108, 800, 108); // Horizontal header
+     it.line(0, 440, 800, 440); // Horizontal footer
+     it.line(532, 260, 800, 260); // Horizontal Right 
+     it.line(266, 108, 266, 440); // Vertical first line
+     it.line(532, 108, 532, 440); // Vertical second line
+
+     // Sunrise / Sunset
+     it.printf(11, 145, id(materialdesign_icons_32), TextAlign::BASELINE_LEFT, "\U000F059C");
+     it.printf(45, 145, id(openSansBold_font), TextAlign::BOTTOM_LEFT, id(epaper_sunrise).state.c_str());
+
+     it.printf(110, 145, id(materialdesign_icons_32), TextAlign::BASELINE_LEFT, "\U000F059B");
+     it.printf(145, 145, id(openSansBold_font), TextAlign::BOTTOM_LEFT, id(epaper_sunset).state.c_str());
+
+     
+     // outside temp in Right upper Grid
+      it.print(540, 300, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F1055");
+      it.print(567, 300, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F050F");
+      it.printf(552, 390, id(openSansBold_70), TextAlign::BOTTOM_LEFT, " %5.1f°C", id(temp).state); 
+      // min max temp 
+      it.printf(540, 430, id(openSansBold_16), TextAlign::BOTTOM_LEFT, " Min:%5.1f °C", id(outside_temp_min).state);
+      it.printf(687, 430, id(openSansBold_16), TextAlign::BOTTOM_LEFT, " Max:%5.1f °C", id(outside_temp_max).state);
+      // Windchill
+      if(id(windchill).has_state()) {
+       x = 552, y = 410;
+       it.print(x + 15 , y, id(materialdesign_icons_25), TextAlign::BOTTOM_RIGHT, "\U000F059D"); 
+       it.print(x + 12,y, id(materialdesign_icons_25), TextAlign::BOTTOM_LEFT, "\U000F050F");
+       it.printf(x + 30, y, id(openSansBold_16), TextAlign::BOTTOM_LEFT, " %5.1f°C", id(windchill).state); 
+       }
+
+     
+     // inside temp in Right upper Grid
+      it.print(540, 150, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F156D");
+      it.print(567, 150, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F050F");
+      it.printf(552, 240, id(openSansBold_70), TextAlign::BOTTOM_LEFT, " %s°C", id(inside_temp).state.c_str());
+
+      //fuel
+      it.print(1, 30, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F0298");
+      it.printf(34, 28, id(openSansBold_font), TextAlign::BOTTOM_LEFT, "E10 Avia %s € -- Jet %s €", id(fuel_avia).state.c_str(), id(fuel_jet).state.c_str());
+
+      //heizoel
+      it.print(1, 65, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F0FE5");
+      it.printf(38, 63, id(openSansBold_font), TextAlign::BOTTOM_LEFT, "Oel %s €/L", id(heizoel).state.c_str());
+      
+      //CO2
+      it.print(11, 185, id(materialdesign_icons_42), TextAlign::BOTTOM_LEFT, "\U000F07E4");
+      it.printf(65, 175, id(openSansBold_font), TextAlign::BOTTOM_LEFT, " %s ppm", id(co2).state.c_str());
+
+      //Waste
+      it.print(1, 105, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F0A7A");
+      it.printf(35, 100, id(openSansBold_font), TextAlign::BOTTOM_LEFT, " %s", id(waste).state.c_str());
+
+      //Raining
+      // it.print(275, 145, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F0597");
+      it.printf(315, 140, id(openSansBold_font), TextAlign::BOTTOM_LEFT, "Heute:%5.1f L/m2", id(rain_today).state);
+      
+      // Rain Status
+     if(id(rain_status).has_state()) {
+       x = 300, y = 145;
+       if (id(rain_status).state == "off") {
+       it.print(x + 5, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F1508");
+       } else if (id(rain_status).state == "on") {
+       it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0597");
+      }
+     }
+      
+      //Windspeed - Dir - Min - Max
+      it.print(275, 175, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F059D");
+      it.printf(312, 170, id(openSansBold_font), TextAlign::BOTTOM_LEFT, "%5.1f km/h", id(windspeed).state);
+      //Wind Max-Min
+      it.printf(430, 158, id(openSansBold_13), TextAlign::BOTTOM_LEFT, "%5.1f km/h ", id(wind_max).state);
+      it.line(428, 158, 515, 158); // Horizontal Right
+      it.printf(430, 174, id(openSansBold_13), TextAlign::BOTTOM_LEFT, "%5.1f km/h", id(wind_min).state);
+
+      it.print(275, 205, id(materialdesign_icons_32), TextAlign::BOTTOM_LEFT, "\U000F1382");
+      it.printf(317, 200, id(openSansBold_font), TextAlign::BOTTOM_LEFT, "%s - ", id(wind_dir_txt).state.c_str());
+      it.printf(368, 200, id(openSansBold_font), TextAlign::BOTTOM_LEFT, " %5.1f ° ", id(winddir).state);
+
+       // Moon Phase
+     if(id(moon).has_state()) {
+       x = 300, y = 240;
+       if (id(moon).state == "first_quarter") {
+       it.print(x + 5, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F61");
+       it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Viertelmond");
+       } else if (id(moon).state == "waxing_gibbous") {
+       it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F68");
+       it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Zunehmender Mond");
+      } else if (id(moon).state == "full_moon") {
+       it.print(x + 6 , y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F62");
+       it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Vollmond");
+      } else if (id(moon).state == "waning_gibbous") {
+       it.print(x + 3 , y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F66");
+       it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Dreiviertel Mond");
+      }
+      else if (id(moon).state == "waning_crescent") {
+       it.print(x + 3 , y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F67");
+       it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Abnehmende Sichel");
+      }
+     }
+  
+       
+     // Current weather 
+     // https://www.home-assistant.io/integrations/weather/
+     // weahtericon;temperature;humidity,pressure;wind_speed
+     // ex. data:   cloudy;5,9;50;1025,6;16,9
+ 
+     std::map <std::string, std::string> weatherMap =  {
+      std::make_pair("exceptional","\U000F0F2F"),
+      std::make_pair("cloudy","\U000F0590"),
+      std::make_pair("cloudy-alert","\U000F0F2F"),
+      std::make_pair("fog","\U000F0591"),
+      std::make_pair( "hail","\U000F0592"),
+      std::make_pair( "hazy","\U000F0F30"),
+      std::make_pair( "hurricane","\U000F0898"),
+      std::make_pair( "lightning","\U000F0593"),
+      std::make_pair( "lightning-rainy","\U000F067E"),
+      std::make_pair( "night","\U000F0594"),
+      std::make_pair( "clear-night","\U000F0594"),
+      std::make_pair( "night-partly-cloudy","\U000F0F31"),
+      std::make_pair( "partly-cloudy","\U000F0595"),
+      std::make_pair( "partlycloudy","\U000F0595"),
+      std::make_pair( "partly-lightning","\U000F0F32"),
+      std::make_pair( "partly-rainy","\U000F0F33"),
+      std::make_pair( "partly-snowy","\U000F0F34"),
+      std::make_pair( "partly-snowy-rainy","\U000F0F35"),
+      std::make_pair( "pouring","\U000F0596"),
+      std::make_pair( "rainy","\U000F0597"),
+      std::make_pair( "snowy","\U000F0598"),
+      std::make_pair( "snowy-heavy","\U000F0F36"),
+      std::make_pair( "snowy-rainy","\U000F067F"),
+      std::make_pair( "sunny","\U000F0599"),
+      std::make_pair( "sunny-alert","\U000F0F37"),
+      std::make_pair( "sunny-off","\U000F14E4"),
+      std::make_pair( "tornado","\U000F0F38"),
+      std::make_pair( "windy","\U000F059D"),
+      std::make_pair( "windy-variant","\U000F059E")};
+       
+     if(id(epaper_weather_actual).has_state()) {
+       std::string actualWeatherCSV = id(epaper_weather_actual).state; //("cloudy;5,9;50;1025,6;16,9");
+       ESP_LOGI("Weather today", "%s", actualWeatherCSV.c_str());
+       std::size_t current, previous = 0;
+       char delim = ';';
+       current = actualWeatherCSV.find(delim);
+       x = 25; y = 285;
+       for (int i=0; i<5; i++) {
+           const char * value = actualWeatherCSV.substr(previous, current - previous).c_str();
+           if(i == 0) { // icon
+             std::string unicodeWeatherIcon = weatherMap.at(value);
+             it.printf(x , y, id(materialdesign_icons_50), TextAlign::BASELINE_LEFT, unicodeWeatherIcon.c_str()); 
+             y = 205;
+             x = x + 90;
+           } else if (i == 1) { // temperature
+              it.printf(x, y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s  °C", value);
+           } else if (i == 2) { // humidity
+              it.printf(x, y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s %s", value, "%");
+           } else if (i == 3) { // pressure
+              it.printf(x, y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s PA", value);
+           } else if (i == 4) { // windpeed
+              it.printf(x, y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s m/s", value);
+           }
+           y += 25;
+           previous = current + 1;
+           current = actualWeatherCSV.find(delim, previous);
+       }
+     }
+
+     // Weather Forecast
+     if(id(epaper_weather_forecast).has_state()) {
+       std::string forecastWeatherCSV = id(epaper_weather_forecast).state; // Mon;sunny;16,5;5,1;Tue;sunny;17,2;6,8;Wed;sunny;15,4;2,7;Thu;sunny;15,3;4,6;Fri;partlycloudy;16,0;3,5
+       ESP_LOGI("Weather forecast", "%s", forecastWeatherCSV.c_str());
+       std::size_t current, previous = 0;
+       char delim = ';';
+       current = forecastWeatherCSV.find(delim);
+       x = 5; y = 370;
+       int nextRow =0;
+       for (int i=0; i<12; i++) {
+           const char * value = forecastWeatherCSV.substr(previous, current - previous).c_str();
+           if(i == 0 || i == 4 || i == 8 || i == 12 || i == 16) { // Weekday
+              it.printf(x, y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s", value);
+           } else if (i == 1 || i == 5 || i == 9 || i == 13 || i == 17) { // icon
+             it.printf(x + 50  , y, id(materialdesign_icons_32), TextAlign::BASELINE_LEFT, weatherMap.at(value).c_str()); 
+           } else if (i == 2 || i == 6 || i == 10 || i == 14 || i == 18) { // Temp high
+              it.printf(x + 100 , y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s°C", value);
+           } else if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) { // Temp low
+              it.printf(x + 170, y, id(openSansBold_font), TextAlign::BASELINE_LEFT,"%s °C", value);
+           }
+           nextRow = nextRow + 1;
+           if (nextRow == 4) {
+             y += 28;
+             nextRow = 0;
+           }
+           previous = current + 1;
+           current = forecastWeatherCSV.find(delim, previous);
+       }
+     }
+
+     //Time
+      it.strftime(540, 100, id(watch_font),TextAlign::BOTTOM_LEFT, "%H:%M", id(hass_time).now());
+      it.strftime(520, 110, id(openSansBold_font),TextAlign::BOTTOM_LEFT, "%A, %d.%m.%y, KW %W", id(hass_time).now());
+      // it.line(530, 108, 770, 108);
+
+     // -- Footer ---
+       
+     // WiFi Signal Strength
+     if(id(wifisignal).has_state()) {
+       x = 35, y = 480;
+       if (id(wifisignal).state >= -50) {
+           it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0928");
+           ESP_LOGI("WiFi", "Exellent");
+       } else if (id(wifisignal).state  >= -60) {
+           it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0925");
+           ESP_LOGI("WiFi", "Good");
+       } else if (id(wifisignal).state  >= -67) {
+           it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0922");
+           ESP_LOGI("WiFi", "Fair");
+       } else if (id(wifisignal).state  >= -70) {
+           it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F091F");
+           ESP_LOGI("WiFi", "Weak");
+       } else {
+           it.print(x, y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F092B");
+           ESP_LOGI("WiFi", "Unlikely");
+       }
+     }
+      
+     // ESP Home UpTime
+     if (id(uptime_human).has_state()) {
+         it.printf(645, 465, id(openSansBold_14), TextAlign::BASELINE_LEFT, "UpTime: %s", id(uptime_human).state.c_str());
+     }
+      
+      
+      
+      
+     
+ 
+
+
+
