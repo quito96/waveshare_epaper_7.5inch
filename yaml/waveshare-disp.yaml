@@ -471,7 +471,7 @@ display:
       it.printf(317, 200, id(openSansBold_font), TextAlign::BOTTOM_LEFT, "%s - ", id(wind_dir_txt).state.c_str());
       it.printf(368, 200, id(openSansBold_font), TextAlign::BOTTOM_LEFT, " %5.1f ° ", id(winddir).state);
 
-       // Moon Phase
+       // Moon Phase new_moon
      if(id(moon).has_state()) {
        x = 300, y = 240;
        if (id(moon).state == "first_quarter") {
@@ -486,10 +486,12 @@ display:
       } else if (id(moon).state == "waning_gibbous") {
        it.print(x + 3 , y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F66");
        it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Dreiviertel Mond");
-      }
-      else if (id(moon).state == "waning_crescent") {
+      } else if (id(moon).state == "waning_crescent") {
        it.print(x + 3 , y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F67");
        it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Abnehmende Sichel");
+      } else if (id(moon).state == "new_moon") {
+       it.print(x + 3 , y, id(materialdesign_icons_32), TextAlign::BOTTOM_RIGHT, "\U000F0F64");
+       it.print(x + 15, y -10, id(openSansBold_14), TextAlign::BOTTOM_LEFT, " Neumond"); 
       }
      }
   
